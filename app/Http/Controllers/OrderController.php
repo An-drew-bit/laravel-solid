@@ -27,7 +27,9 @@ class OrderController extends Controller
         OrderStoreRequest $request, OrderStoreActions $orderStoreActions, OrderNotificationsAction $orderNotificationsAction
     ): RedirectResponse
     {
-        if ($order = $orderStoreActions->handle($request->validated())) {
+        $order = $orderStoreActions->handle($request->validated());
+
+        if ($order->exists) {
             $orderNotificationsAction->handle($order);
         }
 

@@ -10,7 +10,7 @@ class OrderStoreActions
     {
         $order = Order::create($data);
 
-        if ($order) {
+        if ($order->exists) {
             for ($index = 0; $index < count($data['products_ids']); $index++) {
                 $order->products()->attach($data['products_ids'][$index], [
                     'quantity' => $data['products_quantities'][$index] ?? 1,
