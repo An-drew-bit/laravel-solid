@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Utilities\Notifications\Contract\NotificationContract;
+use App\Utilities\Notifications\TelegramNotification;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,8 +23,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+        $this->app->bind(NotificationContract::class, TelegramNotification::class);
     }
 }
